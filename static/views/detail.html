@@ -1,0 +1,495 @@
+<div ng-controller="detailCtrl">
+    <div ng-include="'views/include/header.html'"></div>
+    <section>
+        <div class="side_list" ng-hide="menuState">
+            <div class="data-list-tab">
+                <div class="selectValue">
+                    <ul id="check_list">
+                    <li ng-repeat="col in linelist">
+                        <span>{{col.title}}</span>
+                        <input type="checkbox" ng-model="col.show">
+                    </li>
+                     </ul>
+                </div>
+            </div>
+        </div>
+        <div id="side_line">
+            <div id="sideButton">
+                <button id="sideIcon" ng-click="toggle()">&gt;</button>
+            </div>
+        </div>
+        <div class="ra-box-shadow" id="table_list">
+        <div class="ng-table-group"  >
+            <div  class="header_tool">
+                <span class="form-search">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <input type="text"  aria-label="search" ng-model="search.text" ng-change="search()">
+                </span>
+                &nbsp;
+                <button class="btn btn-primary ra-btn-default ra-btn-icon ra-btn--add brn-group" ng-click="add()">
+                    Add
+                </button>
+                <button type="submit" class="btn ra-btn-outline ng-pristine ng-untouched ng-valid ng-binding ng-empty brn-group" ng-hide="memberVm.isInProgress" ng-file-select="" ng-model="memberVm.batchFile" ng-file-change="memberVm.uploadMember($files)" ng-multiple="false" allow-dir="false" accept="*.xlsx,*.csv" ng-disabled="memberVm.showProgress" popover="excel or csv" popover-trigger="mouseenter" popover-placement="bottom" onclick="document.getElementById(&quot;--ng-file-upload-0.3464366558489005&quot;).click()" id="e--ng-file-upload-0.3464366558489005" aria-hidden="false" aria-invalid="false" style="overflow: hidden;">
+                    <i class="fa" aria-hidden="true"></i>
+                    Download
+                </button>
+        </div>
+        <table id="initTable" ng-table="tableParams" class="table table-condensed table-bordered table-striped" show-filter="true" ng-form="tableForm" ng-table-columns-binding="linelist">
+            <thead>
+            <tr>
+                <th class="header sortable" ng-show="isCategory">Category</th>
+                <th class="header sortable" ng-show="isRadar">Radar</th>
+                <th ng-show="isPage_Name">Page_Name</th>
+                <th ng-show="isReference_URL">Reference_URL</th>
+                <th ng-show="isGeo_Locale_URL">Geo_Locale_URL</th>
+                <th ng-show="isNotes">Notes</th>
+                <th ng-show="isWS_ID">WS_ID</th>
+                <th ng-show="isWS_Task">WS_Task</th>
+                <th ng-show="isWords_to_Translate">Words_to_Translate</th>
+                <th ng-show="isWords_to_Edit">Words_to_Edit</th>
+                <th ng-show="isTotal_Words">Total_Words</th>
+                <th ng-show="isAssignee">Assignee</th>
+                <th ng-show="isCD_Delegate">CD_Delegate</th>
+                <th ng-show="isCD_Review">CD_Review</th>
+                <th ng-show="isType">Type</th>
+                <th ng-show="isWriter_ISV_Ready">Writer_ISV_Ready</th>
+                <th ng-show="isWriter_ISV_Due_Day">Writer_ISV_Due_Day</th>
+                <th ng-show="isCD_ISV_ready">CD_ISV_ready</th>
+                <th ng-show="isCD_ISV_Due_day">CD_ISV_Due_day</th>
+                <th ng-show="isCD_ISV_Approved">CD_ISV_Approved</th>
+                <th ng-show="isArt_CD_ISV_Ready">Art_CD_ISV_Ready</th>
+                <th ng-show="isArt_CD_ISV_Due_day">Art_CD_ISV_Due_day</th>
+                <th ng-show="isXF_ISV_Ready">XF_ISV_Ready</th>
+                <th ng-show="isXF_ISV_Due_day">XF_ISV_Due_day</th>
+                <th ng-show="isGraphic_Ready">Graphic_Ready</th>
+                <th ng-show="isGraphic_Due_day">Graphic_Due_day</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+           <!-- <tr ng-if="isShowFilter">
+                <td>
+                  <input class="form-control" type="text" ng-model="search.text" ng-change="search('text')" maxlength="30"/>
+                </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterRadar" ng-change="search('Radar')" maxlength="30"/>
+                </td>
+                <td><input class="form-control" type="text" ng-model="search.filterPage_name" ng-change="search('PageName')" maxlength="30"/></td>
+                <td><input class="form-control" type="text" ng-model="search.filterReference_URL" ng-change="search('ReferURL')" maxlength="30"/></td>
+                <td><input class="form-control" type="text" ng-model="search.filterGeo_Local_URL" ng-change="search('GeoLocal')" maxlength="30"/></td>
+                <td><input class="form-control" type="text" ng-model="search.filterNotes" ng-change="search('Notes')" maxlength="30"/></td>
+                <td><input class="form-control" type="text" ng-model="search.filterWS_ID" ng-change="search('WsId')" maxlength="30"/></td>
+                <td></td>
+                <td><input class="form-control" type="text" ng-model="search.filterWords_to_Translate" ng-change="search('WordsTrans')"  maxlength="30"/></td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterWords_to_Edit" ng-change="search('WordsEdit')"  maxlength="30"/>
+                </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterTotal_Words" ng-change="search('TotalWords')"  maxlength="30"/>
+                </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterAssignee" ng-change="search('Assignee')"  maxlength="30"/>
+                </td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterCD_Delegate" ng-change="search('CdDg')"  maxlength="30"/>
+                </td>
+                <td></td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterType" ng-change="search('Type')"  maxlength="30"/>
+                </td>
+                <td></td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterWriter_ISV_Due_Day" ng-change="search('WIsvDay')"  maxlength="30"/>
+                </td>
+                <td title="filterCD_ISV_ready"></td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterCD_ISV_Due_day" ng-change="search('CDIsvDay')"  maxlength="30"/>
+                </td>
+                <td title="CD_ISV_App"></td>
+                <td></td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterArt_CD_ISV_Due_day" ng-change="search('ACDIsvDay')"  maxlength="30"/>
+                </td>
+                <td></td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterXF_ISV_Due_day" ng-change="search('XFIsvDay')"  maxlength="30"/>
+                </td>
+                <td></td>
+                <td>
+                    <input class="form-control" type="text" ng-model="search.filterGraphic_Due_day" ng-change="search('GPDay')"  maxlength="30"/>
+                </td>
+                <td></td>
+            </tr>-->
+           <tr ng-show="isShowInput" class="detailTable" ng-form="addRow">
+               <td data-title="'Category'" filter="{Category: 'text'}" sortable="'Category'">
+                   <div >
+                       <input type="text" name="category" ng-model="saveAddrow.category1" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Radar'" filter="{Radar: 'text'}" sortable="'Radar'">
+                   <div >
+                       <input type="text" ng-model="saveAddrow.radar" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Page_Name'" filter="{Page_Name: 'text'}" sortable="'Page_Name'" >
+                   <div  >
+                       <input type="text" ng-model="saveAddrow.page_name" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Reference_URL'" filter="{Reference_URL: 'text'}" sortable="'Reference_URL'">
+                   <div  >
+                       <input type="text" ng-model="saveAddrow.reference_url" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Geo_Locale_URL'" filter="{Geo_Locale_URL: 'text'}" sortable="'Geo_Locale_URL'">
+                   <div >
+                       <input type="text" ng-model="saveAddrow.geo_locale_url" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Notes'" filter="{Notes: 'text'}" sortable="'Notes'">
+                   <div >
+                       <input type="text" ng-model="saveAddrow.notes" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'WS_ID'" filter="{WS_ID: 'text'}" sortable="'WS_ID'">
+                   <div  >
+                       <input type="text" ng-model="saveAddrow.ws_id" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'WS_Task'" filter="{WS_Task: 'text'}" sortable="'WS_Task'">
+                   <div  >
+                       <input type="text" ng-model="saveAddrow.ws_task" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Words_to_Translate'" filter="{Words_to_Translate:'text'}" sortable="'Words_to_Translate'">
+                   <div >
+                       <input type="number" ng-model="saveAddrow.words_to_translate" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Words_to_Edit'" filter="{Words_to_Edit: 'text'}" sortable="'Words_to_Edit'">
+                   <div  >
+                       <input type="number" ng-model="saveAddrow.words_to_edit" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Total_Words'" filter="{Total_Word: 'text'}" sortable="'Total_Word'">
+                   <div >
+                       <input type="number" ng-model="saveAddrow.total_words" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Assignee'" filter="{Assignee: 'text'}" sortable="'Assignee'">
+                   <div  >
+                       <input type="text" ng-model="saveAddrow.assignee" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'CD_Delegate'" filter="{CD_Delegate: 'text'}" sortable="'CD_Delegate'">
+                   <div  >
+                       <input type="text" ng-model="saveAddrow.cd_delegate" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'CD_Review'">
+                   <div class="Ctrl">
+                       <input type="checkbox" ng-model="saveAddrow.cd_review" class="editable-input  input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Type'" filter="{Type: 'text'}" sortable="'Type'">
+                   <div  >
+                       <input type="text" ng-model="saveAddrow.type" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Writer_ISV_Ready'">
+                   <div class="Ctrl">
+                       <input type="checkbox" ng-model="saveAddrow.writer_isv_ready" class="editable-input  input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Writer_ISV_Due_Day'" filter="{Writer_ISV_Due_Day: 'text'}" sortable="'Writer_ISV_Due_Day'">
+                   <div >
+                       <input type="text" ng-model="saveAddrow.writer_isv_due_day" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'CD_ISV_ready'">
+                   <div class="Ctrl">
+                       <input type="checkbox" ng-model="saveAddrow.cd_isv_ready" class="editable-input input-sm" >
+                   </div>
+               </td>
+               <td data-title="'CD_ISV_due_day'" filter="{CD_ISV_due_day: 'text'}" sortable="'CD_ISV_due_day'">
+                   <div >
+                       <input type="text" ng-model="saveAddrow.cd_isv_due_day" class="editable-input form-control input-sm" >
+                   </div>
+               </td>
+               <td data-title="'CD_ISV_Approved'" >
+                   <div class="Ctrl">
+                       <input type="checkbox" ng-model="saveAddrow.cd_isv_approved" class="editable-input  input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Art_CD_ISV_Ready'" >
+                   <div class="Ctrl">
+                       <input type="checkbox" ng-model="saveAddrow.art_cd_isv_ready" class="editable-input  input-sm" >
+                   </div>
+               </td>
+               <td data-title="'Art_CD_ISV_due_day'" filter="{Art_CD_ISV_Due_day: 'text'}" sortable="'Art_CD_ISV_Due_day'">
+                   <div >
+                       <input type="text" ng-model="saveAddrow.art_cd_isv_due_day" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td data-title="'XF_ISV_Ready'" >
+                   <div >
+                       <input type="checkbox" ng-model="saveAddrow.xf_isv_ready" class="editable-input  input-sm" >
+                   </div>
+               </td>
+               <td data-title="'XF_ISV_Due_day'" filter="{XF_ISV_Due_day: 'text'}" sortable="'XF_ISV_Due_day'">
+                   <div >
+                       <input type="text" ng-model="saveAddrow.xf_isv_due_day" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td data-title="'Graphic_Ready'" filter="{Graphic_Ready: 'text'}" sortable="'Graphic_Ready" ng-if="true" ng-switch="rowForm.isEditing" ng-form="graphic_ready">
+                 <div>
+                       <input type="checkbox" ng-model="saveAddrow.graphic_ready" class="editable-input form-control input-sm" >
+                  </div>
+               </td>
+               <td data-title="'Graphic_Due_day'" filter="{Graphic_Due_day: 'text'}" sortable="'Graphic_Due_day'" ng-if="true" ng-switch="rowForm.isEditing" ng-form="graphic_due_day">
+                  <div>
+                      <input type="text" ng-model="saveAddrow.graphic_due_day" class="editable-input form-control input-sm">
+                  </div>
+               </td>
+               <td class="editable-style">
+                   <button class="btn  btn-sm ra-btn-default"
+                           ng-click="saveAddrow()"  ng-disabled="addRow.$pristine || addRow.$invalid">
+                       <span class="glyphicon glyphicon-ok"></span></button>
+                   <button class="btn btn-default btn-sm"
+                           ng-click="cancelAddrow()">
+                       <span class="glyphicon glyphicon-remove"></span></button>
+               </td>
+           </tr>
+           <tr class="ng-table-group" ng-repeat-start="group in $groups">
+               <td colspan="3">{{group.value}}</td>
+           </tr>
+           <tr ng-repeat="item in group.data track by $index" class="detailTable" ng-form="rowForm" id="userListUpdate" >
+               <td ng-cloak data-title="'Category'" filter="{Category: 'text'}" sortable="'Category'" ng-if="removeColumn_Category"  ng-switch="rowForm.isEditing">
+                   <span ng-switch-default class="editable-text"> {{item['Category']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" name="category1" ng-model="save.category1" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Radar'" filter="{Radar: 'text'}" sortable="'Radar'" ng-if="removeColumn_Radar" ng-switch="rowForm.isEditing"  >
+                    <span ng-switch-default class="editable-text">
+                        <a href="{{item['Radar']}}" target="_blank">{{item['Radar']}}</a>
+                    </span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.radar" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Page_Name'" filter="{Page_Name: 'text'}" sortable="'Page_Name'" ng-if="removeColumn_Page_Name" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['Page_Name']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.page_name" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Reference_URL'" filter="{ Reference_URL: 'text'}" sortable="'Reference_URL'" ng-if="removeColumn_Reference_URL" ng-switch="rowForm.isEditing">
+                    <span ng-switch-default class="editable-text">
+                        <a ng-href="{{item['Reference_URL']}}" target="_blank">{{item['Reference_URL']}}</a>
+                    </span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.reference_url" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Geo_Locale_URL'" filter="{ Geo_Locale_URL: 'text'}" sortable="'Geo_Locale_URL'" ng-if="removeColumn_Geo_Locale_URL" ng-switch="rowForm.isEditing" >
+                    <span ng-switch-default class="editable-text">
+                        <a href="{{item['Geo_Locale_URL']}}"target="_blank">{{item['Geo_Locale_URL']}}</a>
+                    </span>
+                   <div  ng-switch-when="true">
+                       <input type="url" ng-model="save.geo_locale_url" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Notes'" filter="{Notes: 'text'}" sortable="'Notes'" ng-if="removeColumn_Notes" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['Notes']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.notes" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'WS_ID'" filter="{WS_ID: 'text'}" sortable="'WS_ID'" ng-if="removeColumn_WS_ID" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['WS_ID']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.ws_id" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'WS_Task'" filter="{WS_Task: 'text'}" sortable="'WS_Task'" ng-if="removeColumn_WS_Task" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">
+                       <input type="checkbox" ng-model="item['WS_Task']" onclick="return false">
+                   </span>
+                   <div  ng-switch-when="true">
+                       <input type="checkbox" ng-model="save.ws_task" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Words_to_Translate'" filter="{Words_to_Translate: 'number'}" sortable="'Words_to_Translate'" ng-if="removeColumn_Words_to_Translate" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['Words_to_Translate']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="number" ng-model="save.words_to_translate" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Words_to_Edit'" filter="{Words_to_Edit: 'number'}" sortable="'Words_to_Edit'" ng-if="removeColumn_Words_to_Edit" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default>{{item['Words_to_Edit']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="number" ng-model="save.words_to_edit" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Total_Words'" filter="{Total_Words: 'number'}" sortable="'Total_Words'" ng-if="removeColumn_Total_Words" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['Total_Words']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="number" ng-model="save.total_words" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Assignee'" filter="{Assignee: 'text'}" sortable="'Assignee'" ng-if="removeColumn_Assignee" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['Assignee']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.assignee" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'CD_Delegate'" filter="{ CD_Delegate: 'text'}" sortable="'CD_Delegate'" ng-if="removeColumn_CD_Delegate" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['CD_Delegate']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.cd_delegate" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak class="box" data-title="'CD_Review'" filter="{ CD_Review: 'text'}" sortable="'CD_Review'" ng-if="removeColumn_CD_Review" ng-switch="rowForm.isEditing" >
+                    <span ng-switch-default class="editable-text">
+                        <input type="checkbox" ng-model="item.CD_Review" onclick="return false">
+                    </span>
+                   <div  ng-switch-when="true">
+                       <input type="checkbox" ng-model="save.cd_review" class="editable-input input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Type'" filter="{ Type: 'select'}" sortable="'Type'" ng-if="removeColumn_Type" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['Type']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.type" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak class="box" data-title="'Writer_ISV_Ready'"  ng-if="removeColumn_Writer_ISV_Ready" ng-switch="rowForm.isEditing" >
+                    <span ng-switch-default class="editable-text">
+                        <input type="checkbox" ng-model="item.Writer_ISV_Ready" onclick="return false">
+                    </span>
+                   <div  ng-switch-when="true">
+                       <input type="checkbox" ng-model="save.writer_isv_ready" class="editable-input  input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Writer_ISV_Due_Day'" filter="{ writer_ISV_Due_day: 'text'}" sortable="'writer_ISV_Due_day'" ng-if="removeColumn_Writer_ISV_Due_day" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['Writer_ISV_Due_day']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.writer_isv_due_day" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak class="box" data-title="'CD_ISV_ready'" ng-if="removeColumn_CD_ISV_ready" ng-switch="rowForm.isEditing" >
+                    <span ng-switch-default class="editable-text">
+                        <input type="checkbox" ng-model="item.CD_ISV_Ready" onclick="return false">
+                    </span>
+                   <div  ng-switch-when="true">
+                       <input type="checkbox" ng-model="save.cd_isv_ready" class="editable-input  input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'CD_ISV_Due_day'" filter="{ CD_ISV_Due_day: 'text'}" sortable="'CD_ISV_Due_day'" ng-if="removeColumn_CD_ISV_Due_day" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item.CD_ISV_Due_day}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.cd_isv_due_day" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak class="box" data-title="'CD_ISV_Approved'"  ng-if="removeColumn_CD_ISV_Approved" ng-switch="rowForm.isEditing" readonly>
+                    <span ng-switch-default class="editable-text">
+                        <input type="checkbox" ng-model="item.CD_ISV_Approved" onclick="return false">
+                     </span>
+                   <div  ng-switch-when="true">
+                       <input type="checkbox" ng-model="save.cd_isv_approved" class="editable-input  input-sm" required >
+                   </div>
+               </td>
+               <td ng-cloak class="box" data-title="'Art_CD_ISV_Ready'"  ng-if="removeColumn_Art_CD_ISV_Ready" ng-switch="rowForm.isEditing" >
+                    <span ng-switch-default class="editable-text">
+                        <input type="checkbox" ng-model="item.Art_CD_ISV_Ready" onclick="return false">
+                   </span>
+                   <div  ng-switch-when="true">
+                       <input type="checkbox" ng-model="save.art_cd_isv_ready" class="editable-input  input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak data-title="'Art_CD_ISV_Due_day'" filter="{ Art_CD_ISV_Due_day: 'text'}" sortable="'Art_CD_ISV_Due_day'" ng-if="removeColumn_Art_CD_ISV_Due_day" ng-switch="rowForm.isEditing" >
+                    <span ng-switch-default class="editable-text">
+                        {{item.Art_CD_ISV_Due_day}}
+                    </span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.art_cd_isv_due_day" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td ng-cloak class="box" data-title="'XF_ISV_Ready'"  ng-if="removeColumn_XF_ISV_Ready" ng-switch="rowForm.isEditing" >
+                    <span ng-switch-default class="editable-text">
+                        <input type="checkbox" ng-model="item.XF_ISV_Ready" onclick="return false">
+                    </span>
+                   <div  ng-switch-when="true">
+                       <input type="checkbox" ng-model="save.xf_isv_ready" class="editable-input  input-sm" required>
+                   </div>
+               </td>
+               <td  ng-cloak data-title="'XF_ISV_Due_day'" filter="{XF_ISV_Due_day: 'text'}" sortable="'XF_ISV_Due_day'" ng-if="removeColumn_XF_ISV_Due_day" ng-switch="rowForm.isEditing" >
+                   <span ng-switch-default class="editable-text">{{item['XF_ISV_Due_day']}}</span>
+                   <div  ng-switch-when="true">
+                       <input type="text" ng-model="save.xf_isv_due_day" class="editable-input form-control input-sm" required >
+                   </div>
+               </td>
+               <td class="box" data-title="'Graphic_Ready'" filter="{Graphic_Ready: 'text'}" sortable="'Graphic_Ready" ng-if="removeColumn_Graphic_Ready" ng-switch="rowForm.isEditing" >
+                  <span ng-switch-default class="editable-text">
+                      <input type="checkbox" ng-model="item['Graphic_Ready']" onclick="return false"></span>
+                  <div  ng-switch-when="true">
+                     <input type="checkbox" ng-model="save.graphic_ready" class="editable-input form-control input-sm" required>
+                   </div>
+               </td>
+               <td data-title="'Graphic_Due_day'" filter="{Graphic_Due_day: 'text'}" sortable="'Graphic_Due_day'" ng-if="removeColumn_Graphic_Due_day" ng-switch="rowForm.isEditing">
+               <span ng-switch-default class="editable-text">{{item['Graphic_Due_day']}}</span>
+               <div  ng-switch-when="true">
+               <input type="text" ng-model="save.graphic_due_day" class="editable-input form-control input-sm" required>
+               </div>
+               </td>
+               <td class="editable-style">
+                   <button class="btn  btn-sm ra-btn-default"
+                           ng-click="save(item.ID,rowForm)" ng-if="rowForm.isEditing" >
+                       <span class="glyphicon glyphicon-ok"></span></button>
+                   <button class="btn btn-default btn-sm"
+                           ng-click="cancel(item.ID,rowForm)" ng-if="rowForm.isEditing">
+                       <span class="glyphicon glyphicon-remove"></span></button>
+                   <button class="btn btn-default btn-sm edit_button"
+                           ng-click="editRow(item.ID,rowForm)"
+                           ng-if="!rowForm.isEditing">
+                       <span class="glyphicon glyphicon-pencil"></span></button>
+                   <button class="btn btn-danger btn-sm"
+                           ng-click="del(item.ID)" ng-if="!rowForm.isEditing">
+                       <span class="glyphicon glyphicon-trash"></span></button>
+               </td>
+           </tr>
+           <tr ng-repeat-end class="sum">
+               <td ng-show="isCategory" class="text-right"><strong class="text-success">Summary:</strong></td>
+               <td ng-show="isRadar"></td>
+               <td ng-show="isPage_Name"></td>
+               <td ng-show="isReference_URL"></td>
+               <td ng-show="isGeo_Locale_URL"></td>
+               <td ng-show="isNotes"></td>
+               <td ng-show="isWS_ID"></td>
+               <td ng-show="isWS_Task"></td>
+               <td ng-show="isWords_to_Translate"><em><b class="text-success">{{sum(group.data,"Words_to_Translate")}}</b></em></td>
+               <td ng-show="isWords_to_Edit"><em><b class="text-success">{{sum(group.data,"Words_to_Edit")}}</b></em></td>
+               <td ng-show="isTotal_Words"><em><b class="text-success">{{sum(group.data,"Total_Words")}}</b></em></td>
+               <td ng-show="isAssignee"></td>
+               <td ng-show="isCD_Delegate"></td>
+               <td ng-show="isCD_Review"></td>
+               <td ng-show="isType"></td>
+               <td ng-show="isWriter_ISV_Ready"></td>
+               <td ng-show="isWriter_ISV_Due_Day"></td>
+               <td ng-show="isCD_ISV_ready"></td>
+               <td ng-show="isCD_ISV_Due_day"></td>
+               <td ng-show="isCD_ISV_Approved"></td>
+               <td ng-show="isArt_CD_ISV_Ready"></td>
+               <td ng-show="isArt_CD_ISV_Due_day"></td>
+               <td ng-show="isXF_ISV_Ready"></td>
+               <td ng-show="isXF_ISV_Due_day"></td>
+               <td ng-show="isGraphic_Ready"></td>
+               <td ng-show="isGraphic_Due_day"></td>
+               <td></td>
+           </tr>
+       </tbody>
+    </table>
+        </div>
+    </section>
+</div>

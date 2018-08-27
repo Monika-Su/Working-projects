@@ -1,0 +1,20 @@
+<header>
+    <div class="listNav">
+        <div class="user">
+            <span class="userIcon"></span>
+            <span id="name">Hi {{name_value}}</span>
+        </div>
+        <div>Inventory List</div>
+    </div>
+    <div id="nav">
+        <ul  class="col-lg-12 col-md-12 col-xs-12">
+            <!--<li  id="back" class="col-md-2"><a href="index.html">Back</a></li>-->
+            <li  class="col-md-2 text-center" ng-click="getOverview()">Overview</li>
+            <li  class="col-md-2 text-center active" ng-click="goDetail('HKEN')">HKEN</li>
+            <li  class="col-md-2 text-center" ng-click="goDetail('CN')">CN</li>
+            <li  class="col-md-2 text-center" ng-click="goDetail('HK')">HKTC</li>
+            <li  class="col-md-2 text-center" ng-click="goDetail('TW')">TW</li>
+            <li  class="col-md-2 text-center" ng-click="goDetail('MO')">MO</li>
+        </ul>
+    </div>
+</header>

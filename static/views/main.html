@@ -1,0 +1,163 @@
+<div ng-include="'views/include/header.html'"></div>
+<div class="container" ng-controller="mainCtrl">
+    <div class="Summay">
+        <span>Summay - Interactive(Hours)</span>
+    </div>
+    <table ng-table="tableParams" class="table table-bordered table-hover" show-filter="true">
+        <thead >
+          <tr >
+              <th></th>
+              <th ng-repeat=" key in newDate" sortable= "key" >
+                 {{key}}
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat=" (item,value) in userDate">
+              <td>{{item}}</td>
+              <td ng-repeat=" hoursItem in value">{{hoursItem}}</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+          </tr>
+        </tbody>
+    </table>
+    <div >
+        <div>
+            <p>Daily Breakdown - HK/MO</p>
+        <table  ng-table="tableParams" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th rowspan="2">8/30</th>
+                <th rowspan="2">WorldServer Handoff (Words)</th>
+                <th rowspan="2">Copy Updates (Words)</th>
+                <th colspan="2">ISV</th>
+                <th colspan="2">CD Delegates</th>
+                <th rowspan="2">Total Workload (Hours)</th>
+            </tr>
+           <tr>
+               <th>HK</th>
+               <th>MO</th>
+               <th>HK</th>
+               <th>MO</th>
+           </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr ng-repeat="HKItem in HMdata">
+                    <td>{{HKItem.Assignee}}</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>234</td>
+                </tr>
+            <tr ng-repeat="HKItem in HMdata">
+                <td>
+                    {{HKItem.CD_Delegate}}
+                </td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>234</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        <div>
+            <p>Daily Breakdown - CN</p>
+        <table  ng-table="tableParams" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th rowspan="2">8/30</th>
+                <th rowspan="2">WorldServer Handoff (Words)</th>
+                <th rowspan="2">Copy Updates (Words)</th>
+                <th colspan="2">ISV</th>
+                <th colspan="2">CD Delegates</th>
+                <th rowspan="2">Total Workload (Hours)</th>
+            </tr>
+            <tr>
+                <th>HK</th>
+                <th>MO</th>
+                <th>HK</th>
+                <th>MO</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="CNItem in CNdata">
+                <td>{{CNItem.Assignee}}</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>456</td>
+            </tr>
+            <tr ng-repeat="CNItem in CNdata">
+                <td>
+                    {{CNItem.CD_Delegate}}
+                </td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>234</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        <div>
+            <p>Daily Breakdown - TW</p>
+            <table  ng-table="tableParams" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th rowspan="2">8/30</th>
+                    <th rowspan="2">WorldServer Handoff (Words)</th>
+                    <th rowspan="2">Copy Updates (Words)</th>
+                    <th colspan="2">ISV</th>
+                    <th colspan="2">CD Delegates</th>
+                    <th rowspan="2">Total Workload (Hours)</th>
+                </tr>
+                <tr>
+                    <th>HK</th>
+                    <th>MO</th>
+                    <th>HK</th>
+                    <th>MO</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="TWItem in TWdata">
+                    <td>{{TWItem.Assignee}}</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>689</td>
+                </tr>
+                <tr ng-repeat="TWItem in TWdata">
+                    <td>
+                        {{TWItem.CD_Delegate}}
+                    </td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>234</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
